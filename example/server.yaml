@@ -33,6 +33,8 @@ spec:
               value: redis-sentinel
             - name: SENTINEL_PORT
               value: redis-sentinel
+            - name: REDIS_PASSWORD
+              value: ENV_REDIS_PASSWORD
           ports:
             - containerPort: 6379
               name: redis-server

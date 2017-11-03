@@ -29,6 +29,8 @@ spec:
               value: redis-server
             - name: SERVICE_PORT
               value: redis-server
+            - name: REDIS_PASSWORD
+              value: ENV_REDIS_PASSWORD
           ports:
             - containerPort: 26379
               name: redis-sentinel
@@ -49,6 +51,8 @@ spec:
               value: redis-sentinel
             - name: SENTINEL_PORT
               value: redis-sentinel
+            - name: REDIS_PASSWORD
+              value: ENV_REDIS_PASSWORD
           volumeMounts:
             - name: opt
               mountPath: /opt
