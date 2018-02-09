@@ -20,6 +20,6 @@ spec:
             - name: LISTEN_ADDRESS
               value: :6379
             - name: SENTINEL_ADDRESS
-              value: redis-sentinel.default:26379
+              value: redis-sentinel:26379
             - name: REDIS_MASTER_NAME
               value: mymaster
