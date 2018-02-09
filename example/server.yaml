@@ -10,13 +10,22 @@ spec:
     metadata:
       labels:
         app: redis-server
-      annotations:
-        pod.beta.kubernetes.io/init-containers: '[{
-            "name": "k8s-redis-ha-server",
-            "image": "prlx/k8s-redis-ha:server-3.0.1",
-            "volumeMounts": [{"name": "opt", "mountPath": "/opt"}]
-          }]'
     spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                topologyKey: kubernetes.io/hostname
+                labelSelector:
+                  matchLabels:
+                    app: "redis"
+      initContainers:
+        - name: redis-ha-server
+          image: prlx/k8s-redis-ha:server-3.0.1
+          volumeMounts:
+            - name: opt
+              mountPath: /opt
       containers:
         - name: redis-server
           image: redis:3.2
