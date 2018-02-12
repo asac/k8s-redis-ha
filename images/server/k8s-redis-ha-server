@@ -22,7 +22,13 @@ reset_sentinel () {
 
 sentinel_failover () {
   set +e
-  timeout 10 redis-cli -h "$1" -p 26379 sentinel failover mymaster
+  while true; do
+    if timeout 10 redis-cli -h "$1" -p 26379 sentinel failover mymaster | grep NOGOODSLAVE; then
+      sleep 1
+    else
+      break
+    fi
+  done
   set -e
 }
 
