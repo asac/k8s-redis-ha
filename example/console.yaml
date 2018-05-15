@@ -4,6 +4,8 @@ kind: Pod
 metadata:
   name: console
 spec:
+  nodeSelector:
+    beta.kubernetes.io/arch: amd64
   restartPolicy: Always
   containers:
     - name: console
